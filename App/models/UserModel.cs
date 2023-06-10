@@ -45,9 +45,10 @@ namespace App.models
             return user;
         }
 
-        public List<User> FindAllEmployees()
+        public static List<User> FindAllEmployees()
         {
-            return new List<User>();
+            List<User> employees = Data.Users.Where(user => user.Type == "employee").ToList();
+            return employees;
         }
 
         public List<User> GetProfile()
