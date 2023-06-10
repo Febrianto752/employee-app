@@ -24,6 +24,7 @@ namespace App.views
                         Environment.Exit(0);
                         break;
                     default:
+
                         Console.WriteLine("Invalid input!!!");
                         Console.ReadKey();
                         HomePage();
@@ -33,6 +34,7 @@ namespace App.views
             }
             catch (Exception ex)
             {
+
                 Console.WriteLine("Invalid input!!!");
                 Console.ReadKey();
                 HomePage();
@@ -42,31 +44,41 @@ namespace App.views
         public static void SignIn()
         {
             Console.Clear();
+            Data.Session.Clear();
+
             Console.WriteLine("**** SignIn ****");
-            Console.Write("Username : ");
-            string username = Console.ReadLine();
-            Console.Write("Password : ");
-            string password = Console.ReadLine();
-
-            List<User> user = UserModel.FindUser(username, password);
-
-            if (user.Count < 1)
+            try
             {
-                Console.WriteLine("Username or Password is wrong!!!");
-                Console.ReadKey();
-                SignIn();
+                Console.Write("Username : ");
+                string username = Console.ReadLine();
+                Console.Write("Password : ");
+                string password = Console.ReadLine();
+
+                List<User> user = UserModel.FindUser(username, password);
+
+                if (user.Count < 1)
+                {
+                    Console.WriteLine("Username or Password is wrong!!!");
+                    Console.ReadKey();
+                    SignIn();
+                }
+
+                Data.Session.Add("signin", user[0]);
+
+                if (user[0].Type == "admin")
+                {
+                    AdminView.Dashboard();
+                }
+                else
+                {
+                    Console.WriteLine("Employee Dashboard");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
 
-            Data.Session.Add("signin", user[0]);
-
-            if (user[0].Type == "admin")
-            {
-                AdminView.Dashboard();
-            }
-            else
-            {
-                Console.WriteLine("Employee Dashboard");
-            }
         }
     }
 }
