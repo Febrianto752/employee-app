@@ -1,11 +1,14 @@
-﻿using App.models;
-
-namespace App
+﻿namespace App
 {
     class Data
     {
-        public static List<Admin> Admins = new List<Admin>() { new Admin() };
-        public static List<Employee> Employees = new List<Employee>();
-        public static int autoIncrementId = 1;
+
+        // inisialiasi list users dan akun admin
+        public static List<User> Users = new List<User>() { new User(fullname: "febrianto", username: "admin", password: "Admin123", salary: 100000, type: "admin") };
+        public static int AutoIncrementId = 1;
+        public static Dictionary<string, User> Session = new Dictionary<string, User>();
+
+
+
     }
 }
