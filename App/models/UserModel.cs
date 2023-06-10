@@ -24,7 +24,6 @@ namespace App.models
                 Data.Users.Add(newUser);
 
                 return true;
-
             }
             else
             {
@@ -57,10 +56,7 @@ namespace App.models
             return employees;
         }
 
-        public List<User> GetProfile()
-        {
-            return new List<User>();
-        }
+
 
         public static bool Update(User userEdited, User previousData)
         {
