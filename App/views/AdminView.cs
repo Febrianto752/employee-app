@@ -31,7 +31,7 @@ namespace App.views
                         ShowEmployees();
                         break;
                     case 4:
-                        Console.WriteLine("not implement");
+                        SearchEmployee();
                         break;
                     case 5:
                         GeneralView.HomePage();
@@ -117,14 +117,9 @@ namespace App.views
             string password = Console.ReadLine();
             User profileEdited = default;
 
-            if (user.Type == "admin")
-            {
-                profileEdited = new User(fullname, username, password, user.Salary, user.Type);
-            }
-            else
-            {
-                profileEdited = new User(fullname, user.Username, password, user.Salary, user.Type);
-            }
+
+            profileEdited = new User(fullname, username, password, user.Salary, user.Type);
+
 
             bool updated = UserModel.Update(profileEdited, previousData: user);
 
@@ -309,7 +304,7 @@ namespace App.views
             {
                 Console.WriteLine("Invalid salary input!!!");
                 Console.ReadKey();
-                CreateEmployee();
+                EditEmployee(user);
             }
 
             User userEdited = new User(fullname, username, password, salary, "employee");
@@ -381,6 +376,39 @@ namespace App.views
                 }
             }
 
+        }
+
+        public static void SearchEmployee()
+        {
+            Console.Clear();
+            Console.WriteLine("*** Search employee by fullname ***");
+            Console.Write("\nEnter keyword : ");
+            string fullname = Console.ReadLine();
+
+            List<User> employees = UserModel.SearchEmployeeByFullname(fullname);
+
+            Console.WriteLine("\nSearch Result :");
+            if (employees.Count > 0)
+            {
+                employees.ForEach(employee =>
+                {
+                    Console.WriteLine("***************");
+                    Console.WriteLine("ID        : {0}", employee.Id);
+                    Console.WriteLine("Fullname  : {0}", employee.Fullname);
+                    Console.WriteLine("Username  : {0}", employee.Username);
+                    Console.WriteLine("Salary    : {0}", employee.Salary);
+                    Console.WriteLine("***************");
+                });
+
+                Console.ReadKey();
+                Dashboard();
+            }
+            else
+            {
+                Console.WriteLine("Employee not found!!!");
+                Console.ReadKey();
+                Dashboard();
+            }
         }
 
 

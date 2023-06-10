@@ -81,7 +81,6 @@ namespace App.models
                 previousData.Salary = userEdited.Salary;
 
                 return true;
-
             }
             else
             {
@@ -95,6 +94,12 @@ namespace App.models
             int index = Data.Users.FindIndex(user => user.Id == id);
             Data.Users.RemoveAt(index);
             return true;
+        }
+
+        public static List<User> SearchEmployeeByFullname(string fullname)
+        {
+            List<User> employees = Data.Users.Where(user => user.Fullname.ToLower().Contains(fullname.ToLower()) && user.Type == "employee").ToList();
+            return employees;
         }
     }
 }
