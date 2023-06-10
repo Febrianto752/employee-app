@@ -9,7 +9,12 @@
         public static Dictionary<string, User> Session = new Dictionary<string, User>();
         public static List<string> ErrorMessage = new List<string>();
 
-
+        public static void PrintErrorMessage()
+        {
+            Console.WriteLine("\nError Message : ");
+            ErrorMessage.ForEach(err => Console.WriteLine(err));
+            ErrorMessage.Clear();
+        }
 
     }
 }

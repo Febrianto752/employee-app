@@ -1,4 +1,6 @@
-﻿namespace App.views
+﻿using App.models;
+
+namespace App.views
 {
     class AdminView
     {
@@ -13,21 +15,72 @@
             Console.WriteLine("4. Logout");
             Console.WriteLine("***********************");
             Console.Write("Choice : ");
-            int choice = int.Parse(Console.ReadLine());
-            switch (choice)
+            try
             {
-                case 1:
+                int choice = int.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        CreateEmployee();
+                        break;
+                    case 2:
 
-                    break;
-                case 2:
-
-                    break;
-                default:
-                    Console.WriteLine("Invalid input!!!");
-                    Console.ReadKey();
-                    Dashboard();
-                    break;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input!!!");
+                        Console.ReadKey();
+                        Dashboard();
+                        break;
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid input!!!");
+                Console.ReadKey();
+                Dashboard();
+            }
+
+        }
+
+        public static void CreateEmployee()
+        {
+            Console.Clear();
+            Console.WriteLine("*** Form Create New Employee ***");
+            Console.Write("Fullname : ");
+            string fullname = Console.ReadLine();
+            Console.Write("Username : ");
+            string username = Console.ReadLine();
+            Console.Write("Password : ");
+            string password = Console.ReadLine();
+            Console.Write("Salary : ");
+            double salary = default;
+            try
+            {
+                salary = double.Parse(Console.ReadLine());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid salary input!!!");
+                Console.ReadKey();
+                CreateEmployee();
+            }
+
+            bool created = UserModel.Create(fullname, username, password, salary);
+
+            if (created)
+            {
+                Console.WriteLine("Successfully created new employee");
+                Console.ReadKey();
+                Dashboard();
+            }
+            else
+            {
+                Data.PrintErrorMessage();
+                Console.ReadKey();
+                Dashboard();
+            }
+
+
         }
     }
 }
