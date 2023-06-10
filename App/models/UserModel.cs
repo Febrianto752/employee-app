@@ -90,9 +90,11 @@ namespace App.models
 
         }
 
-        public bool Delete()
+        public static bool Delete(int id)
         {
-            return false;
+            int index = Data.Users.FindIndex(user => user.Id == id);
+            Data.Users.RemoveAt(index);
+            return true;
         }
     }
 }

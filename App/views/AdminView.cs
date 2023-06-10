@@ -78,7 +78,6 @@ namespace App.views
                     case 1:
                         List<User> user = UserModel.FindUser(Data.Session["signin"].Id);
                         EditProfile(user[0]);
-                        RequestEmployeeId();
                         break;
                     case 2:
                         Dashboard();
@@ -97,8 +96,6 @@ namespace App.views
                 Console.ReadKey();
                 Dashboard();
             }
-
-
 
         }
 
@@ -218,10 +215,10 @@ namespace App.views
                     switch (choice)
                     {
                         case 1:
-                            RequestEmployeeId();
+                            RequestEmployeeIdForEdit();
                             break;
                         case 2:
-                            Environment.Exit(0);
+                            RequestEmployeeIdForDelete();
                             break;
                         case 3:
                             Dashboard();
@@ -253,7 +250,7 @@ namespace App.views
 
         }
 
-        public static void RequestEmployeeId()
+        public static void RequestEmployeeIdForEdit()
         {
             Console.Clear();
             Console.Write("Enter id employee : ");
@@ -283,6 +280,7 @@ namespace App.views
             }
 
         }
+
 
         public static void EditEmployee(User user)
         {
@@ -331,7 +329,60 @@ namespace App.views
                 ShowEmployees();
             }
 
+        }
+
+        public static void RequestEmployeeIdForDelete()
+        {
+            Console.Clear();
+            Console.Write("Enter id employee : ");
+            int id = default;
+            try
+            {
+                id = int.Parse(Console.ReadLine());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid input!!!");
+                Console.ReadKey();
+                ShowEmployees();
+            }
+
+            // id with value 0 is admin
+            if (id == 0)
+            {
+                Console.WriteLine("You cannot deleted this data!!!");
+                Console.ReadKey();
+                ShowEmployees();
+            }
+
+            List<User> user = UserModel.FindUser(id);
+
+            if (user.Count == 0)
+            {
+                Console.WriteLine("User not found!!!");
+                Console.ReadKey();
+                ShowEmployees();
+            }
+            else
+            {
+                bool deleted = UserModel.Delete(user[0].Id);
+
+                if (deleted)
+                {
+                    Console.WriteLine("Successfully to deleted employee data.");
+                    Console.ReadKey();
+                    ShowEmployees();
+                }
+                else
+                {
+                    Console.WriteLine("Something error");
+                    Console.ReadKey();
+                    ShowEmployees();
+                }
+            }
 
         }
+
+
     }
 }

@@ -10,9 +10,6 @@ namespace App
             GeneralView.HomePage();
 
 
-
-
-
         }
     }
 }
