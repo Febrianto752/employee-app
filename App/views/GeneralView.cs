@@ -1,4 +1,6 @@
-﻿namespace App.views
+﻿using App.models;
+
+namespace App.views
 {
     class GeneralView
     {
@@ -9,14 +11,14 @@
             Console.WriteLine("1. SignIn");
             Console.WriteLine("2. Exit");
             Console.WriteLine("*******************");
-            Console.Write("Pilihan : ");
+            Console.Write("Choice : ");
             try
             {
-                int pilihan = int.Parse(Console.ReadLine());
-                switch (pilihan)
+                int choice = int.Parse(Console.ReadLine());
+                switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("login");
+                        SignIn();
                         break;
                     case 2:
                         Environment.Exit(0);
@@ -37,13 +39,34 @@
             }
         }
 
-        //static void SignIn()
-        //{
-        //    Console.WriteLine("**** SignIn ****");
-        //    Console.Write("Username : ");
-        //    Console.ReadLine();
-        //    Console.Write("Password : ");
-        //    Console.ReadLine();
-        //}
+        public static void SignIn()
+        {
+            Console.Clear();
+            Console.WriteLine("**** SignIn ****");
+            Console.Write("Username : ");
+            string username = Console.ReadLine();
+            Console.Write("Password : ");
+            string password = Console.ReadLine();
+
+            List<User> user = UserModel.FindUser(username, password);
+
+            if (user.Count < 1)
+            {
+                Console.WriteLine("Username or Password is wrong!!!");
+                Console.ReadKey();
+                SignIn();
+            }
+
+            Data.Session.Add("signin", user[0]);
+
+            if (user[0].Type == "admin")
+            {
+                AdminView.Dashboard();
+            }
+            else
+            {
+                Console.WriteLine("Employee Dashboard");
+            }
+        }
     }
 }

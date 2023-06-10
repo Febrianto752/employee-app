@@ -8,6 +8,11 @@ namespace App
         static void Main(string[] args)
         {
             GeneralView.HomePage();
+
+
+
+
+
         }
     }
 }

@@ -1,6 +1,10 @@
 ﻿namespace App.utils
 {
-    internal class Auth
+    class Auth
     {
+        public static bool SignIn()
+        {
+            return true;
+        }
     }
 }

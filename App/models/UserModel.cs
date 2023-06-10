@@ -6,9 +6,15 @@
         {
             return false;
         }
-        public List<User> GetAllEmployees()
+        public List<User> FindAllEmployees()
         {
             return new List<User>();
+        }
+
+        public static List<User> FindUser(string username, string password)
+        {
+            List<User> user = Data.Users.Where(user => user.Username == username && user.Password == password).ToList();
+            return user;
         }
 
         public List<User> GetProfile()
