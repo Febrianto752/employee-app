@@ -71,7 +71,7 @@ namespace App.views
                 }
                 else
                 {
-                    Console.WriteLine("Employee Dashboard");
+                    EmployeeView.Dashboard();
                 }
             }
             catch (Exception ex)

@@ -126,6 +126,7 @@ namespace App.views
             if (updated)
             {
                 Console.WriteLine("Successfully updated profile");
+                Data.Session["signin"] = user;
                 Console.ReadKey();
                 Profile();
             }

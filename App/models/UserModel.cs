@@ -62,15 +62,20 @@ namespace App.models
         {
             bool validFullname = Validation.FullnameIsValid(userEdited.Fullname);
             bool validUsername = Validation.UsernameIsValid(userEdited.Username);
-            bool validPassword = Validation.PasswordIsValid(userEdited.Password);
-            bool usernameIsExist = false;
-            List<User> user = FindUser(userEdited.Username);
 
-            if (user.Count > 0)
+            bool usernameIsExist = false;
+            if (userEdited.Username != previousData.Username)
             {
-                usernameIsExist = true;
-                Data.ErrorMessage.Add("Username already exist");
+                List<User> user = FindUser(userEdited.Username);
+
+                if (user.Count > 0)
+                {
+                    usernameIsExist = true;
+                    Data.ErrorMessage.Add("Username already exist");
+                }
             }
+
+            bool validPassword = Validation.PasswordIsValid(userEdited.Password);
 
             if (validFullname && validUsername && validPassword && !usernameIsExist)
             {
