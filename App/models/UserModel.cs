@@ -31,7 +31,6 @@ namespace App.models
             }
         }
 
-
         public static List<User> FindUser(string username, string password)
         {
             List<User> user = Data.Users.Where(user => user.Username == username && user.Password == password).ToList();
@@ -55,8 +54,6 @@ namespace App.models
             List<User> employees = Data.Users.Where(user => user.Type == "employee").ToList();
             return employees;
         }
-
-
 
         public static bool Update(User userEdited, User previousData)
         {

@@ -117,9 +117,7 @@ namespace App.views
             string password = Console.ReadLine();
             User profileEdited = default;
 
-
             profileEdited = new User(fullname, username, password, user.Salary, user.Type);
-
 
             bool updated = UserModel.Update(profileEdited, previousData: user);
 
@@ -242,8 +240,6 @@ namespace App.views
                 Console.ReadKey();
                 Dashboard();
             }
-
-
         }
 
         public static void RequestEmployeeIdForEdit()
@@ -276,7 +272,6 @@ namespace App.views
             }
 
         }
-
 
         public static void EditEmployee(User user)
         {
@@ -411,7 +406,5 @@ namespace App.views
                 Dashboard();
             }
         }
-
-
     }
 }

@@ -30,7 +30,6 @@ namespace App.views
                         HomePage();
                         break;
                 }
-
             }
             catch (Exception ex)
             {

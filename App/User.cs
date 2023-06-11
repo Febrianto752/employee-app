@@ -1,6 +1,5 @@
 ﻿namespace App
 {
-
     class User
     {
         public int Id { get; set; }
@@ -22,8 +21,5 @@
             this.Type = type;
         }
     }
-
-
-
 
 }

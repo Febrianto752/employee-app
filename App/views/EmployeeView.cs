@@ -35,12 +35,10 @@ namespace App.views
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine("Invalid input!!!");
                 Console.ReadKey();
                 Dashboard();
             }
-
         }
 
         public static void Profile()
