@@ -1,4 +1,5 @@
 ﻿using App.models;
+using App.utils;
 
 namespace App.views
 {
@@ -10,7 +11,9 @@ namespace App.views
             Console.WriteLine("***** Welcome {0} *****", Data.Session["signin"].Fullname);
             Console.WriteLine("Main Menu : ");
             Console.WriteLine("1. Profile");
-            Console.WriteLine("2. Logout");
+            Console.WriteLine("2. Cek Ganjil Genap");
+            Console.WriteLine("3. Print Ganjil/Genap (dengan limit)");
+            Console.WriteLine("4. Logout");
             Console.WriteLine("***********************");
             Console.Write("Choice : ");
             try
@@ -22,6 +25,12 @@ namespace App.views
                         Profile();
                         break;
                     case 2:
+                        CheckEvenOddNumberr();
+                        break;
+                    case 3:
+                        PrintEvenOddWithLimit();
+                        break;
+                    case 4:
                         GeneralView.HomePage();
                         Data.Session.Clear();
                         break;
@@ -117,6 +126,104 @@ namespace App.views
                 Profile();
             }
 
+        }
+
+        public static void CheckEvenOddNumberr()
+        {
+            Console.Clear();
+            Console.WriteLine("*** Check Odd or Even Numbers ***");
+            Console.Write("Masukan Bilangan yang ingin di cek : ");
+            string bilangan = Console.ReadLine();
+
+            if (Validation.IsIntegerNumber(bilangan) && Validation.IsPositiveNumber(bilangan))
+            {
+                string result = Mathematic.EvenOddNumberCheck(bilangan);
+                Console.WriteLine($"{bilangan} adalah bilangan {result}");
+                Console.ReadKey();
+                Dashboard();
+            }
+            else
+            {
+                Console.WriteLine("Invalid input!!!");
+                Console.ReadKey();
+                Dashboard();
+            }
+        }
+
+        public static void PrintEvenOddWithLimit()
+        {
+            Console.Clear();
+            string evenOrOdd;
+            string limit;
+            Console.WriteLine("*** Generate Even or Odd Number ***");
+            Console.Write("Pilih (Ganjil / Genap) : ");
+            evenOrOdd = Console.ReadLine();
+
+
+
+            if (evenOrOdd.ToLower() == "genap")
+            {
+                Console.Write("Masukan Limit : ");
+                limit = Console.ReadLine();
+
+
+
+                if (Validation.IsIntegerNumber(limit) && Validation.IsPositiveNumber(limit))
+                {
+                    if (int.Parse(limit) % 2 == 0)
+                    {
+                        Mathematic.PrintEvenNumberToLimit(int.Parse(limit));
+                        Console.ReadKey();
+                        Dashboard();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!, limit input must be even");
+                        Console.ReadKey();
+                        Dashboard();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.ReadKey();
+                    Dashboard();
+                }
+            }
+            else if (evenOrOdd.ToLower() == "ganjil")
+            {
+                Console.Write("Masukan Limit : ");
+                limit = Console.ReadLine();
+
+                if (Validation.IsIntegerNumber(limit) && Validation.IsPositiveNumber(limit))
+                {
+                    if (int.Parse(limit) % 2 != 0)
+                    {
+                        Mathematic.PrintOddNumberToLimit(int.Parse(limit));
+                        Console.ReadKey();
+                        Dashboard();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!, limit input must be odd");
+                        Console.ReadKey();
+                        Dashboard();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid limit input!!!");
+                    Console.ReadKey();
+                    Dashboard();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid type input!!!");
+                Console.ReadKey();
+                Dashboard();
+
+            }
         }
     }
 }

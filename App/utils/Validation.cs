@@ -42,5 +42,25 @@
             }
 
         }
+
+        public static bool IsIntegerNumber(string bilangan)
+        {
+            bool isNumber;
+            isNumber = int.TryParse(bilangan, out int _);
+
+            return isNumber;
+        }
+
+        public static bool IsPositiveNumber(string bilangan)
+        {
+            if (int.Parse(bilangan) < 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
